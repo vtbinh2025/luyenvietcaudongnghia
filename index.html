@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luyện Viết Câu Đồng Nghĩa - English 9</title>
+    <style>
+        :root { --primary: #4f46e5; --success: #10b981; --error: #ef4444; --bg: #f3f4f6; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); padding: 20px; color: #1f2937; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+        .header { text-align: center; border-bottom: 2px solid #eee; margin-bottom: 20px; padding-bottom: 10px; }
+        .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin-bottom: 15px; background: #fff; }
+        .prompt { font-weight: 600; color: #374151; margin-bottom: 5px; }
+        .start-word { color: var(--primary); font-weight: bold; font-style: italic; margin-bottom: 10px; display: block; }
+        input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; margin-top: 10px; }
+        input:focus { border-color: var(--primary); outline: none; }
+        .result { margin-top: 10px; display: none; padding: 10px; border-radius: 8px; font-size: 0.9rem; }
+        .progress-container { height: 10px; background: #eee; border-radius: 5px; margin: 10px 0; overflow: hidden; }
+        .progress-bar { height: 100%; width: 0; transition: 0.5s; }
+        .controls { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+        button { cursor: pointer; padding: 12px 25px; border-radius: 8px; border: none; font-weight: 600; color: white; transition: 0.3s; }
+        .btn-random { background: var(--primary); }
+        .btn-check { background: var(--success); }
+        button:hover { opacity: 0.8; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>📝 Luyện Viết Câu Đồng Nghĩa</h1>
+        <p>Dữ liệu trích xuất từ đề thi Tiếng Anh 9</p>
+    </div>
+
+    <div id="quiz-area"></div>
+
+    <div class="controls">
+        <button class="btn-random" onclick="initQuiz()">🎲 Random 5 Câu Mới</button>
+        <button class="btn-check" onclick="checkScores()">🚀 Chấm Điểm (%)</button>
+    </div>
+</div>
+
+<script>
+    // Ngân hàng câu hỏi trích xuất từ file PDF của bạn
+    const questionBank = [
+        { original: "Something went wrong with our car on the way to the beach.", start: "Our car broke", keys: ["down", "on the way", "beach"], correct: "Our car broke down on the way to the beach." },
+        { original: "If he doesn't catch the first metro, he will be late.", start: "Unless he", keys: ["catches", "the first metro", "will be late"], correct: "Unless he catches the first metro, he will be late." },
+        { original: "The last time she wrote to her grandparents was last April.", start: "She hasn't", keys: ["written", "to her grandparents", "since last april"], correct: "She hasn't written to her grandparents since last April." },
+        { original: "The weather was so awful that we couldn't go picnicking.", start: "It was such", keys: ["awful weather", "that we", "couldn't go"], correct: "It was such awful weather that we couldn't go picnicking." },
+        { original: "The children like making models of animals in their free time.", start: "The children are keen", keys: ["on making", "models", "free time"], correct: "The children are keen on making models of animals in their free time." },
+        { original: "I advise you to go to the dentist twice a year.", start: "If I were", keys: ["you", "i would go", "twice a year"], correct: "If I were you, I would go to the dentist twice a year." },
+        { original: "Because of his good performances, he was nominated as Singer of the Year.", start: "Because he", keys: ["performed well", "was nominated"], correct: "Because he performed well, he was nominated as Singer of the Year." },
+        { original: "The book was very interesting. I couldn't put it down.", start: "The book was", keys: ["so interesting", "that", "i couldn't"], correct: "The book was so interesting that I couldn't put it down." },
+        { original: "I am doing an entrance examination test now.", start: "Lan said", keys: ["she was doing", "examination", "then"], correct: "Lan said she was doing an entrance examination test then." },
+        { original: "We don't have enough money to buy a new car.", start: "We wish", keys: ["had enough", "money", "buy a new car"], correct: "We wish we had enough money to buy a new car." },
+        { original: "Drivers and passengers must fasten the seat belt.", start: "It is compulsory for", keys: ["drivers", "passengers", "to fasten"], correct: "It is compulsory for drivers and passengers to fasten the seat belt." },
+        { original: "The students spent ten minutes waiting for their bus.", start: "It took", keys: ["the students", "ten minutes", "to wait"], correct: "It took the students ten minutes to wait for their bus." },
+        { original: "Since Tim was careless, he lost his job.", start: "Because of", keys: ["tim's carelessness", "lost"], correct: "Because of Tim's carelessness, he lost his job." },
+        { original: "Why don't we collect those empty bottles?", start: "Robert suggested that those", keys: ["empty bottles", "should be collected"], correct: "Robert suggested that those empty bottles should be collected." },
+        { original: "She is interested in learning English.", start: "She takes", keys: ["an interest", "in learning"], correct: "She takes an interest in learning English." },
+		// Page 1 & 2
+        { original: "Something went wrong with our car on the way to the beach.", start: "Our car broke", keys: ["down", "on the way"], correct: "Our car broke down on the way to the beach." },
+        { original: "If he doesn't catch the first metro, he will be late for the conference.", start: "Unless he", keys: ["catches", "the first metro", "will be late"], correct: "Unless he catches the first metro, he will be late for the conference." },
+        { original: "The last time she wrote to her grandparents was last April.", start: "She hasn't", keys: ["written", "grandparents", "since last april"], correct: "She hasn't written to her grandparents since last April." },
+        { original: "The weather was so awful that we couldn't go picnicking as planned.", start: "It was such", keys: ["awful weather", "that", "couldn't go"], correct: "It was such awful weather that we couldn't go picnicking as planned." },
+        // Page 3 & 4
+        { original: "The children like making models of animals in their free time.", start: "The children are keen", keys: ["on making", "models", "free time"], correct: "The children are keen on making models of animals in their free time." },
+        { original: "I advise you to go to the dentist twice a year.", start: "If I were", keys: ["you", "i would go", "twice a year"], correct: "If I were you, I would go to the dentist twice a year." },
+        { original: "She hasn't participated in a competition for two years.", start: "It has been", keys: ["two years", "since", "participated"], correct: "It has been two years since she last participated in a competition." },
+        { original: "Because of his good performances, he was nominated as Singer of the Year.", start: "Because he", keys: ["performed well", "was nominated"], correct: "Because he performed well, he was nominated as Singer of the Year." },
+        // Page 5
+        { original: "The book was very interesting. I couldn't put it down.", start: "The book was", keys: ["so interesting", "that", "couldn't put"], correct: "The book was so interesting that I couldn't put it down." },
+        { original: "She is an excellent singer. She cannot play the piano well.", start: "Although", keys: ["excellent singer", "cannot play", "piano"], correct: "Although she is an excellent singer, she cannot play the piano well." },
+        { original: "I am doing an entrance examination test now.", start: "Lan said", keys: ["she was", "doing", "then"], correct: "Lan said she was doing an entrance examination test then." },
+        { original: "We don't have enough money to buy a new car.", start: "We wish", keys: ["we had", "enough money", "buy a new car"], correct: "We wish we had enough money to buy a new car." },
+        // Page 6
+        { original: "Change the way you learn vocabulary, and you can improve your English.", start: "If you", keys: ["change", "can improve"], correct: "If you change the way you learn vocabulary, you can improve your English." },
+        { original: "Why don't we collect those empty bottles for recycling?", start: "Robert suggested that those", keys: ["empty bottles", "should be collected"], correct: "Robert suggested that those empty bottles should be collected for recycling." },
+        { original: "Because Tom is very lazy, he can't get good marks at school.", start: "Tom is very lazy,", keys: ["so", "can't get"], correct: "Tom is very lazy, so he can't get good marks at school." },
+        { original: "Michael loves to play football after school.", start: "Michael is fond", keys: ["of playing", "football"], correct: "Michael is fond of playing football after school." },
+        // Page 9 & 10
+        { original: "Drivers and passengers must fasten the seat belt when travelling in cars.", start: "It is compulsory for", keys: ["drivers", "passengers", "to fasten"], correct: "It is compulsory for drivers and passengers to fasten the seat belt when travelling in cars." },
+        { original: "Robert Pattinson is a British actor. He plays Edward Cullen in the Twilight saga.", start: "Robert Pattinson", keys: ["who is", "plays", "Twilight"], correct: "Robert Pattinson, who is a British actor, plays Edward Cullen in the Twilight saga." },
+        { original: "The students spent ten minutes waiting for their bus.", start: "It took", keys: ["the students", "ten minutes", "to wait"], correct: "It took the students ten minutes to wait for their bus." },
+        { original: "Since Tim was careless, he lost his job.", start: "Because of", keys: ["carelessness", "lost his job"], correct: "Because of Tim's carelessness, he lost his job." },
+        // Page 11-14
+        { original: "Why don't you clear up the garbage before leaving, Linh?", start: "Mai suggested that", keys: ["linh", "should clear up"], correct: "Mai suggested that Linh should clear up the garbage before leaving." },
+        { original: "We haven't used these machines for a long time.", start: "It's been", keys: ["a long time", "since", "last used"], correct: "It's been a long time since we last used these machines." },
+        { original: "That is the best tennis player in the club.", start: "No one else in the club can", keys: ["play tennis", "as well as"], correct: "No one else in the club can play tennis as well as that player." },
+        { original: "It's a pity they are travelling on uncomfortable buses.", start: "They wish they", keys: ["were not travelling", "comfortable buses"], correct: "They wish they were not travelling on uncomfortable buses (or: were travelling on comfortable ones)." },
+        { original: "Mary sings better than her elder sister does.", start: "Mary's elder sister doesn't", keys: ["sing", "as well as"], correct: "Mary's elder sister doesn't sing as well as she does." },
+        { original: "They find it easy to understand native speakers.", start: "They have no", keys: ["difficulty", "understanding"], correct: "They have no difficulty understanding native speakers." }
+   ];
+
+    let currentQuestions = [];
+
+    function initQuiz() {
+        // Lấy ngẫu nhiên 5 câu
+        currentQuestions = [...questionBank].sort(() => 0.5 - Math.random()).slice(0, 5);
+        const area = document.getElementById('quiz-area');
+        area.innerHTML = currentQuestions.map((q, i) => `
+            <div class="card">
+                <div class="prompt">Q${i+1}: ${q.original}</div>
+                <span class="start-word">→ ${q.start}...</span>
+                <input type="text" id="ans-${i}" placeholder="Hoàn thiện câu...">
+                <div class="progress-container"><div class="progress-bar" id="bar-${i}"></div></div>
+                <div class="result" id="res-${i}"></div>
+            </div>
+        `).join('');
+    }
+
+    function checkScores() {
+        currentQuestions.forEach((q, i) => {
+            const userAns = document.getElementById(`ans-${i}`).value.toLowerCase().trim();
+            const resDiv = document.getElementById(`res-${i}`);
+            const progressBar = document.getElementById(`bar-${i}`);
+            
+            let matches = 0;
+            q.keys.forEach(k => {
+                if (userAns.includes(k.toLowerCase())) matches++;
+            });
+
+            const score = Math.round((matches / q.keys.length) * 100);
+            
+            // Cập nhật giao diện
+            resDiv.style.display = "block";
+            resDiv.innerHTML = `<strong>Điểm: ${score}%</strong><br>Gợi ý: ${q.correct}`;
+            resDiv.style.color = score === 100 ? 'var(--success)' : (score > 40 ? '#b45309' : 'var(--error)');
+            
+            progressBar.style.width = score + "%";
+            progressBar.style.background = score === 100 ? 'var(--success)' : (score > 40 ? '#f59e0b' : 'var(--error)');
+        });
+    }
+
+    // Chạy lần đầu
+    initQuiz();
+</script>
+</body>
+</html>
