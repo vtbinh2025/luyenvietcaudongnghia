@@ -3,38 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luyện Viết Câu Đồng Nghĩa - English 9</title>
+    <title>Luyện Viết Câu Đồng Nghĩa - English 9 Pro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root { --primary: #4f46e5; --success: #10b981; --error: #ef4444; --bg: #f8f9fa; }
-        body { background: var(--bg); font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         .nav-link { font-weight: 600; cursor: pointer; }
         .container-main { max-width: 900px; margin: 30px auto; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .card-quiz { border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .card-quiz { border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin-bottom: 20px; position: relative; }
         .start-word { color: var(--primary); font-weight: bold; font-style: italic; display: block; margin-bottom: 10px; }
-        .theory-section { margin-bottom: 30px; border-left: 4px solid var(--primary); padding-left: 20px; }
+        .theory-section { margin-bottom: 30px; border-left: 4px solid var(--primary); padding-left: 20px; transition: 0.3s; }
+        .theory-section:target { background-color: #fef9c3; padding-top: 10px; padding-bottom: 10px; border-radius: 0 8px 8px 0; }
         .theory-title { color: var(--primary); font-weight: bold; }
         .hidden { display: none; }
         .progress-container { height: 8px; background: #eee; border-radius: 4px; margin: 10px 0; overflow: hidden; }
         .progress-bar-inner { height: 100%; width: 0; transition: 0.5s; }
-        table { font-size: 0.9rem; }
+        .btn-view-theory { font-size: 0.75rem; padding: 2px 8px; position: absolute; top: 15px; right: 15px; }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="#">🎓 English 9</a>
+        <a class="navbar-brand" href="#">🎓 English 9 Pro</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" id="menu-theory" onclick="showSection('theory')">📖 Lý Thuyết</a>
+                    <a class="nav-link" id="menu-theory" onclick="showSection('theory')">📖 Lý Thuyết</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="menu-practice" onclick="showSection('practice')">✍️ Luyện Tập</a>
+                    <a class="nav-link active" id="menu-practice" onclick="showSection('practice')">✍️ Luyện Tập</a>
                 </li>
             </ul>
         </div>
@@ -42,196 +43,176 @@
 </nav>
 
 <div class="container container-main">
-    <div id="section-theory">
-    <h2 class="mb-4 text-center">Tổng Hợp Cấu Trúc Đồng Nghĩa</h2>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="theory-section">
-                <p class="theory-title">1. Câu Điều Kiện & Unless</p>
-                <p><code>If ... not</code> ⟷ <code>Unless ...</code> (Trừ khi)</p>
-                <small>Ví dụ: If he doesn't catch the first metro, he will be late. → Unless he catches the first metro, he will be late.</small>
-            </div>
-            <div class="theory-section">
-                <p class="theory-title">2. Hiện Tại Hoàn Thành & Quá Khứ Đơn</p>
-                <p><code>The last time + S + V2/ed + was + [Thời gian]</code> ⟷ <code>S + hasn't/haven't + V3/ed + since...</code></p>
-                <small>Ví dụ: The last time she wrote to her grandparents was last April. → She hasn't written to her grandparents since last April.</small>
-            </div>
-            <div class="theory-section">
-                <p class="theory-title">3. So sánh với "So" và "Such"</p>
-                <p><code>S + be + so + Adj + that...</code> ⟷ <code>It + be + such + (a/an) + Adj + N + that...</code></p>
-                <small>Ví dụ: The weather was so awful that we couldn't go picnicking. → It was such awful weather that we couldn't go picnicking.</small>
-            </div>
-            <div class="theory-section">
-                <p class="theory-title">4. Cấu trúc Suggestion (Gợi ý)</p>
-                <p><code>Why don't we...?</code> ⟷ <code>S + suggested + V-ing</code> hoặc <code>suggested that + S + should + V(bare)</code>.</p>
-                <small>Ví dụ: Why don't we collect those empty bottles? → Robert suggested that those empty bottles should be collected.</small>
-            </div>
-            <div class="theory-section">
-                <p class="theory-title">5. Cấu trúc Cảm xúc / Sở thích</p>
-                <p><code>Like / Enjoy</code> ⟷ <code>Be keen on / Be fond of / Be interested in</code>.</p>
-                <small>Ví dụ: The children like making models of animals in their free time. → The children are keen on making models of animals in their free time.</small>
-            </div>
-            <div class="theory-section">
-                <p class="theory-title">6. Cấu trúc "It takes"</p>
-                <p><code>S + spend + [time] + V-ing</code> ⟷ <code>It takes + [someone] + [time] + to V-inf</code>.</p>
-                <small>Ví dụ: The students spent ten minutes waiting for their bus. → It took the students ten minutes to wait for their bus.</small>
-            </div>
-        </div>
-    </div>
-
-    <div class="theory-section">
-        <p class="theory-title">7. Cấu trúc Because và Because of</p>
-        <p>Dùng để diễn tả nguyên nhân, lý do. Có 2 cách chuyển đổi phổ biến:</p>
-        <ul>
-            <li><strong>Mệnh đề:</strong> <code>Because + S + V + O</code></li>
-            <li><strong>Cụm danh từ:</strong> <code>Because of + Noun Phrase / V-ing</code></li>
-        </ul>
-        <p class="mb-1 small italic">Ví dụ:</p>
-        <div class="bg-light p-2 rounded border-start border-3 border-secondary small">
-            1. <strong>Because he performed well</strong>, he was nominated as Singer of the Year.<br>
-            2. <strong>Because of his good performances</strong>, he was nominated as Singer of the Year.
-        </div>
-    </div>
-
-    <div class="theory-section">
-        <p class="theory-title">8. Cách dùng giới từ sau Nominate</p>
-        <table class="table table-bordered bg-white">
-            <thead class="table-light">
-                <tr>
-                    <th>Cấu trúc</th>
-                    <th>Cách sử dụng</th>
-                    <th>Ví dụ</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Nominated as</strong> + [Danh hiệu/Chức vụ]</td>
-                    <td>Nhấn mạnh vào vị trí, vai trò hoặc danh hiệu được đề cử đảm nhận.</td>
-                    <td>He was nominated as <i>Singer of the Year</i>.</td>
-                </tr>
-                <tr>
-                    <td><strong>Nominated for</strong> + [Giải thưởng/Mục đích]</td>
-                    <td>Nhấn mạnh vào giải thưởng cụ thể hoặc lý do của cuộc đề cử.</td>
-                    <td>He was nominated for the <i>Nobel Prize</i>.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-	<div class="theory-section">
-		<p class="theory-title">9. Cấu trúc bắt buộc (Must ⟷ Compulsory)</p>
-		<p>Dùng để viết lại câu diễn tả sự bắt buộc hoặc nội quy. Cấu trúc chuyển đổi:</p>
-		<ul>
-			<li><strong>Dùng Must:</strong> <code>S + must + V(bare) + O</code></li>
-			<li><strong>Dùng Compulsory:</strong> <code>It is compulsory for + O + to + V(bare)</code></li>
-		</ul>
-		<p class="mb-1 small italic">Ví dụ:</p>
-		<div class="bg-light p-2 rounded border-start border-3 border-secondary small">
-			<strong>Drivers and passengers must fasten the seat belt.</strong><br>
-			→ <strong>It is compulsory for</strong> drivers and passengers <strong>to fasten</strong> the seat belt.
+    <div id="section-theory" class="hidden border-top pt-3">
+        <h2 class="mb-4 text-center text-primary">Hệ Thống Lý Thuyết</h2>
+        
+        <div class="theory-section" id="theory-1">
+			<p class="theory-title">1. Câu Điều Kiện & Unless</p>
+			<p><code>If ... not</code> ⟷ <code>Unless ...</code> (Trừ khi)</p>
 		</div>
-	</div>
-	<div class="theory-section">
-    <p class="theory-title">10. Phân biệt "That" làm Đại từ quan hệ và "That" chỉ kết quả</p>
-    <p>Trong chương trình Tiếng Anh 9, bạn cần phân biệt rõ hai cách dùng này để tránh nhầm lẫn khi viết câu:</p>
-
-    <ul>
-        <li>
-            <strong>That là Đại từ quan hệ:</strong> 
-            Dùng để thay thế cho danh từ chỉ người hoặc vật đứng trước nó. Nó đóng vai trò là chủ ngữ hoặc tân ngữ trong mệnh đề quan hệ.
-            <br><small>Ví dụ: The book <strong>that</strong> I bought yesterday is interesting. (That thay cho The book)</small>
-        </li>
-        <li class="mt-2">
-            <strong>That là Liên từ chỉ kết quả (Cấu trúc So... that):</strong> 
-            Dùng để nối mệnh đề chỉ nguyên nhân (sau So) với mệnh đề chỉ kết quả (sau That). Ở đây "that" không thay thế cho danh từ nào cả.
-            <br><small>Ví dụ: The book was <strong>so</strong> interesting <strong>that</strong> I couldn't put it down.</small>
-        </li>
-    </ul>
-
-    <p class="mb-1 small fw-bold">Bảng so sánh nhanh:</p>
-    <table class="table table-sm table-bordered bg-white small">
-        <thead class="table-light">
-            <tr>
-                <th>Đặc điểm</th>
-                <th>Đại từ quan hệ</th>
-                <th>Liên từ (So... that)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Vị trí</strong></td>
-                <td>Đứng ngay sau Danh từ</td>
-                <td>Đứng sau Tính từ/Trạng từ</td>
-            </tr>
-            <tr>
-                <td><strong>Chức năng</strong></td>
-                <td>Thay thế cho danh từ đó</td>
-                <td>Nối mệnh đề kết quả</td>
-            </tr>
-            <tr>
-                <td><strong>Dấu hiệu</strong></td>
-                <td>N, that + S + V...</td>
-                <td>So + Adj/Adv + that + S + V...</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <p class="mb-1 small italic">Ví dụ thực tế từ bài tập:</p>
-    <div class="bg-light p-2 rounded border-start border-3 border-secondary small">
-        <strong>The weather was so awful that we couldn't go picnicking.</strong><br>
-        → "That" ở đây đi kèm với "So" để chỉ kết quả (Vì thời tiết quá tệ <strong>nên</strong> chúng tôi không đi chơi được).
+		<div class="theory-section" id="theory-2">
+			<p class="theory-title">2. Hiện Tại Hoàn Thành & Quá Khứ Đơn</p>
+			<p><code>The last time... was...</code> ⟷ <code>S + hasn't/haven't + V3... since...</code></p>
+		</div>
+		<div class="theory-section" id="theory-3">
+			<p class="theory-title">3. So sánh (Equal/Comparative/Superlative)</p>
+			<p><code>S1 + V + Adj-er + than + S2</code> ⟷ <code>S2 + V(not) + as + Adj + as + S1</code></p>
+		</div>
+		<div class="theory-section" id="theory-4">
+			<p class="theory-title">4. Cấu trúc Suggestion (Gợi ý)</p>
+			<p><code>Why don't we/you...?</code> ⟷ <code>S + suggested + (that) + S + should + V(bare)</code></p>
+		</div>
+		<div class="theory-section" id="theory-5">
+			<p class="theory-title">5. Cấu trúc Cảm xúc / Sở thích</p>
+			<p><code>Like / Enjoy / Interested in</code> ⟷ <code>Be keen on / fond of / Take an interest in</code></p>
+		</div>
+		<div class="theory-section" id="theory-6">
+			<p class="theory-title">6. Cấu trúc "It takes"</p>
+			<p><code>S + spend + [time] + V-ing</code> ⟷ <code>It takes + [someone] + [time] + to V-inf</code></p>
+		</div>
+		<div class="theory-section" id="theory-7">
+			<p class="theory-title">7. Cấu trúc Cause & Effect (Because/Although)</p>
+			<p><code>Because/Although + Clause</code> ⟷ <code>Because of/In spite of + Noun Phrase/V-ing</code></p>
+		</div>
+		<div class="theory-section" id="theory-8">
+			<p class="theory-title">8. Giới từ sau Động từ (Nominate...)</p>
+			<p><code>Nominate someone as + [vị trí]</code> / <code>Nominate someone for + [giải thưởng]</code></p>
+		</div>
+		<div class="theory-section" id="theory-9">
+			<p class="theory-title">9. Cấu trúc bắt buộc (Must/Compulsory)</p>
+			<p><code>S + must + V</code> ⟷ <code>It is compulsory for someone to V</code></p>
+		</div>
+		<div class="theory-section" id="theory-10">
+			<p class="theory-title">10. Cấu trúc So... that / Such... that</p>
+			<p><code>So + Adj + that</code> ⟷ <code>Such + (a/an) + Adj + N + that</code></p>
+		</div>
+		<div class="theory-section" id="theory-11">
+			<p class="theory-title">11. Đại từ quan hệ (Who/Which/That)</p>
+			<p>Dùng để nối hai câu đơn có cùng đối tượng hoặc thay thế danh từ đứng trước.</p>
+		</div>
+		<div class="theory-section" id="theory-12">
+			<p class="theory-title">12. Câu ước (Wish)</p>
+			<p>Ước trái ngược hiện tại: <code>S + wish(es) + S + V2/ed (were)</code></p>
+		</div>
+		<div class="theory-section" id="theory-13">
+			<p class="theory-title">13. Câu tường thuật (Reported Speech)</p>
+			<p>Lùi thì và đổi trạng từ: <code>"I am ... now"</code> → <code>She said she was ... then</code></p>
+		</div>
+		<div class="theory-section" id="theory-14">
+			<p class="theory-title">14. Cấu trúc Difficult / Find it</p>
+			<p><code>Find it easy/difficult to V</code> ⟷ <code>Have no difficulty (in) V-ing</code></p>
+		</div>
+		<div class="theory-section" id="theory-15">
+			<p class="theory-title">15. Phrasal Verbs (Động từ ghép)</p>
+			<p>Ví dụ: <code>Go wrong</code> ⟷ <code>Break down</code> (hỏng hóc)</p>
+		</div>
     </div>
-</div>
-</div>
 
-    <div id="section-practice" class="hidden">
-        <h2 class="mb-4 text-center">📝 Luyện Viết Câu</h2>
+    <div id="section-practice">
+        <h2 class="mb-4 text-center text-success">📝 Luyện Viết Câu</h2>
         <div id="quiz-area"></div>
-        <div class="text-center mt-4">
-            <button class="btn btn-primary me-2" onclick="initQuiz()">🎲 Đổi 5 Câu Khác</button>
-            <button class="btn btn-success" onclick="checkScores()">🚀 Chấm Điểm</button>
+        <div class="text-center mt-4 border-top pt-4">
+            <button class="btn btn-outline-primary me-2" onclick="initQuiz()">🎲 Làm 5 Câu Mới</button>
+            <button class="btn btn-success px-5 shadow" onclick="checkScores()">🚀 Chấm Điểm</button>
         </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    const questionBank = [
-        { original: "Something went wrong with our car on the way to the beach.", start: "Our car broke", keys: ["down", "on the way"], correct: "Our car broke down on the way to the beach." },
-        { original: "If he doesn't catch the first metro, he will be late.", start: "Unless he", keys: ["catches", "the first metro"], correct: "Unless he catches the first metro, he will be late." },
-        { original: "The last time she wrote to her grandparents was last April.", start: "She hasn't", keys: ["written", "grandparents", "since last april"], correct: "She hasn't written to her grandparents since last April." },
-        { original: "The weather was so awful that we couldn't go picnicking.", start: "It was such", keys: ["awful weather", "that we"], correct: "It was such awful weather that we couldn't go picnicking." },
-        { original: "The children like making models of animals in their free time.", start: "The children are keen", keys: ["on making", "models"], correct: "The children are keen on making models of animals in their free time." },
-        { original: "I advise you to go to the dentist twice a year.", start: "If I were", keys: ["you", "i would go"], correct: "If I were you, I would go to the dentist twice a year." },
-        { original: "Because of his good performances, he was nominated as Singer of the Year.", start: "Because he", keys: ["performed well"], correct: "Because he performed well, he was nominated as Singer of the Year." },
-        { original: "The book was very interesting. I couldn't put it down.", start: "The book was", keys: ["so interesting", "that"], correct: "The book was so interesting that I couldn't put it down." },
-        { original: "We don't have enough money to buy a new car.", start: "We wish", keys: ["we had", "enough money"], correct: "We wish we had enough money to buy a new car." },
-        { original: "Drivers and passengers must fasten the seat belt.", start: "It is compulsory for", keys: ["drivers", "passengers", "to fasten"], correct: "It is compulsory for drivers and passengers to fasten the seat belt." },
-        { original: "The students spent ten minutes waiting for their bus.", start: "It took", keys: ["the students", "ten minutes", "to wait"], correct: "It took the students ten minutes to wait for their bus." },
-        { original: "Why don't we collect those empty bottles?", start: "Robert suggested that those", keys: ["empty bottles", "should be collected"], correct: "Robert suggested that those empty bottles should be collected." },
-        { original: "They find it easy to understand native speakers.", start: "They have no", keys: ["difficulty", "understanding"], correct: "They have no difficulty understanding native speakers." }
-    ];
+   const questionBank = [
+		// Trang 1 & 2
+		{ id: 1, theoryId: 'theory-15', original: "Something went wrong with our car on the way to the beach.", start: "Our car broke", keys: ["down", "on the way"], correct: "Our car broke down on the way to the beach." },
+		{ id: 2, theoryId: 'theory-1', original: "If he doesn't catch the first metro, he will be late for the conference.", start: "Unless he", keys: ["catches", "the first metro", "will be late"], correct: "Unless he catches the first metro, he will be late for the conference." },
+		{ id: 3, theoryId: 'theory-2', original: "The last time she wrote to her grandparents was last April.", start: "She hasn't", keys: ["written", "grandparents", "since last april"], correct: "She hasn't written to her grandparents since last April." },
+		{ id: 4, theoryId: 'theory-10', original: "The weather was so awful that we couldn't go picnicking as planned.", start: "It was such", keys: ["awful weather", "that", "couldn't go"], correct: "It was such awful weather that we couldn't go picnicking as planned." },
+		
+		// Trang 3 & 4
+		{ id: 5, theoryId: 'theory-5', original: "The children like making models of animals in their free time.", start: "The children are keen", keys: ["on making", "models", "free time"], correct: "The children are keen on making models of animals in their free time." },
+		{ id: 6, theoryId: 'theory-1', original: "I advise you to go to the dentist twice a year.", start: "If I were", keys: ["you", "i would go"], correct: "If I were you, I would go to the dentist twice a year." },
+		{ id: 7, theoryId: 'theory-2', original: "She hasn't participated in a competition for two years.", start: "It has been", keys: ["two years", "since", "last participated"], correct: "It has been two years since she last participated in a competition." },
+		{ id: 8, theoryId: 'theory-8', original: "Because of his good performances, he was nominated as Singer of the Year.", start: "Because he", keys: ["performed well", "was nominated"], correct: "Because he performed well, he was nominated as Singer of the Year." },
+		
+		// Trang 5 & 6
+		{ id: 9, theoryId: 'theory-10', original: "The book was very interesting. I couldn't put it down.", start: "The book was", keys: ["so interesting", "that"], correct: "The book was so interesting that I couldn't put it down." },
+		{ id: 10, theoryId: 'theory-7', original: "She is an excellent singer. She cannot play the piano well.", start: "Although", keys: ["excellent singer", "cannot play"], correct: "Although she is an excellent singer, she cannot play the piano well." },
+		{ id: 11, theoryId: 'theory-13', original: "I am doing an entrance examination test now.", start: "Lan said", keys: ["she was", "doing", "then"], correct: "Lan said she was doing an entrance examination test then." },
+		{ id: 12, theoryId: 'theory-12', original: "We don't have enough money to buy a new car.", start: "We wish", keys: ["we had", "enough money"], correct: "We wish we had enough money to buy a new car." },
+		{ id: 13, theoryId: 'theory-1', original: "Change the way you learn vocabulary, and you can improve your English.", start: "If you", keys: ["change", "can improve"], correct: "If you change the way you learn vocabulary, you can improve your English." },
+		{ id: 14, theoryId: 'theory-4', original: "Why don't we collect those empty bottles for recycling?", start: "Robert suggested that those", keys: ["empty bottles", "should be collected"], correct: "Robert suggested that those empty bottles should be collected for recycling." },
+		{ id: 15, theoryId: 'theory-7', original: "Because Tom is very lazy, he can't get good marks at school.", start: "Tom is very lazy,", keys: ["so", "can't get"], correct: "Tom is very lazy, so he can't get good marks at school." },
+		{ id: 16, theoryId: 'theory-5', original: "Michael loves to play football after school.", start: "Michael is fond", keys: ["of playing", "football"], correct: "Michael is fond of playing football after school." },
+
+		// Trang 9 & 10
+		{ id: 17, theoryId: 'theory-9', original: "Drivers and passengers must fasten the seat belt when travelling in cars.", start: "It is compulsory for", keys: ["drivers", "passengers", "to fasten"], correct: "It is compulsory for drivers and passengers to fasten the seat belt when travelling in cars." },
+		{ id: 18, theoryId: 'theory-11', original: "Robert Pattinson is a British actor. He plays Edward Cullen in the Twilight saga.", start: "Robert Pattinson", keys: ["who is", "plays"], correct: "Robert Pattinson, who is a British actor, plays Edward Cullen in the Twilight saga." },
+		{ id: 19, theoryId: 'theory-6', original: "The students spent ten minutes waiting for their bus.", start: "It took", keys: ["the students", "ten minutes", "to wait"], correct: "It took the students ten minutes to wait for their bus." },
+		{ id: 20, theoryId: 'theory-7', original: "Since Tim was careless, he lost his job.", start: "Because of", keys: ["carelessness", "lost his job"], correct: "Because of Tim's carelessness, he lost his job." },
+
+		// Trang 11 - 14
+		{ id: 21, theoryId: 'theory-4', original: "Why don't you clear up the garbage before leaving, Linh?", start: "Mai suggested that", keys: ["linh", "should clear up"], correct: "Mai suggested that Linh should clear up the garbage before leaving." },
+		{ id: 22, theoryId: 'theory-2', original: "We haven't used these machines for a long time.", start: "It's been", keys: ["a long time", "since", "last used"], correct: "It's been a long time since we last used these machines." },
+		{ id: 23, theoryId: 'theory-3', original: "That is the best tennis player in the club.", start: "No one else in the club can", keys: ["play tennis", "as well as"], correct: "No one else in the club can play tennis as well as that player." },
+		{ id: 24, theoryId: 'theory-12', original: "It's a pity they are travelling on uncomfortable buses.", start: "They wish they", keys: ["were not travelling", "comfortable buses"], correct: "They wish they were not travelling on uncomfortable buses." },
+		{ id: 25, theoryId: 'theory-3', original: "Mary sings better than her elder sister does.", start: "Mary's elder sister doesn't", keys: ["sing", "as well as"], correct: "Mary's elder sister doesn't sing as well as she does." },
+		{ id: 26, theoryId: 'theory-14', original: "They find it easy to understand native speakers.", start: "They have no", keys: ["difficulty", "understanding"], correct: "They have no difficulty understanding native speakers." },
+		{ id: 27, theoryId: 'theory-5', original: "She is interested in learning English.", start: "She takes", keys: ["an interest", "in learning"], correct: "She takes an interest in learning English." },
+		
+		// Các câu bổ sung từ nội dung PDF (Dạng Word Form & Sentence Transformation khác)
+		{ id: 28, theoryId: 'theory-11', original: "The house is very old. My grandfather built it in 1950.", start: "The house which", keys: ["grandfather built", "1950"], correct: "The house which my grandfather built in 1950 is very old." },
+		{ id: 29, theoryId: 'theory-1', original: "Study hard, or you will fail the exam.", start: "If you don't", keys: ["study hard", "will fail"], correct: "If you don't study hard, you will fail the exam." },
+		{ id: 30, theoryId: 'theory-13', original: "“Where are you going for your holidays?” said Lan to me.", start: "Lan asked me where", keys: ["i was going", "holidays"], correct: "Lan asked me where I was going for my holidays." },
+		{ id: 31, theoryId: 'theory-6', original: "She spends two hours a day doing her homework.", start: "It takes", keys: ["her two hours", "to do"], correct: "It took her two hours a day to do her homework." },
+		{ id: 32, theoryId: 'theory-3', original: "The Nile is the longest river in the world.", start: "No other river", keys: ["as long as", "the nile"], correct: "No other river in the world is as long as the Nile." },
+		{ id: 33, theoryId: 'theory-7', original: "Despite his illness, he went to work.", start: "Although he", keys: ["was ill", "went to work"], correct: "Although he was ill, he went to work." },
+		{ id: 34, theoryId: 'theory-12', original: "I don't have a computer.", start: "I wish", keys: ["i had", "computer"], correct: "I wish I had a computer." },
+		{ id: 35, theoryId: 'theory-4', original: "Let's go for a swim this afternoon.", start: "He suggested", keys: ["going", "for a swim"], correct: "He suggested going for a swim that afternoon." },
+		{ id: 36, theoryId: 'theory-1', original: "Unless you work harder, you will be fired.", start: "If you", keys: ["don't work", "harder"], correct: "If you don't work harder, you will be fired." },
+		{ id: 37, theoryId: 'theory-2', original: "I last saw him when I was in Hue.", start: "I haven't", keys: ["seen him", "since"], correct: "I haven't seen him since I was in Hue." },
+		{ id: 38, theoryId: 'theory-10', original: "The tea was so hot that I couldn't drink it.", start: "It was such", keys: ["hot tea", "that"], correct: "It was such hot tea that I couldn't drink it." },
+		{ id: 39, theoryId: 'theory-9', original: "You are not allowed to smoke here.", start: "You must", keys: ["not smoke", "here"], correct: "You must not smoke here." },
+		{ id: 40, theoryId: 'theory-14', original: "Understanding him is very difficult.", start: "It is", keys: ["difficult", "to understand"], correct: "It is difficult to understand him." }
+	];
 
     let currentQuestions = [];
+    let userProgress = {}; // Lưu trữ những gì người dùng đã nhập
 
     function showSection(section) {
         document.getElementById('section-theory').classList.toggle('hidden', section !== 'theory');
         document.getElementById('section-practice').classList.toggle('hidden', section !== 'practice');
-        
         document.getElementById('menu-theory').classList.toggle('active', section === 'theory');
         document.getElementById('menu-practice').classList.toggle('active', section === 'practice');
+    }
 
-        if(section === 'practice') initQuiz();
+    function goToTheory(id) {
+        showSection('theory');
+        setTimeout(() => {
+            const el = document.getElementById(id);
+            if(el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+    }
+
+    // Lưu lại văn bản khi người dùng gõ để không bị mất khi chuyển tab
+    function saveDraft(index, value) {
+        userProgress[index] = value;
     }
 
     function initQuiz() {
         currentQuestions = [...questionBank].sort(() => 0.5 - Math.random()).slice(0, 5);
+        userProgress = {}; // Reset khi đổi bộ câu hỏi mới
+        renderQuiz();
+    }
+
+    function renderQuiz() {
         const area = document.getElementById('quiz-area');
         area.innerHTML = currentQuestions.map((q, i) => `
-            <div class="card-quiz shadow-sm">
-                <div class="fw-bold mb-2">Q${i+1}: ${q.original}</div>
+            <div class="card-quiz shadow-sm bg-white">
+                <button class="btn btn-link btn-view-theory text-decoration-none" onclick="goToTheory('${q.theoryId}')">🔍 Xem lý thuyết</button>
+                <div class="fw-bold mb-2 pe-5">Q${i+1}: ${q.original}</div>
                 <span class="start-word">→ ${q.start}...</span>
-                <input type="text" class="form-control mb-2" id="ans-${i}" placeholder="Viết lại câu đồng nghĩa theo từ đã cho...">
+                <input type="text" class="form-control mb-2" id="ans-${i}" 
+                    value="${userProgress[i] || ''}" 
+                    oninput="saveDraft(${i}, this.value)"
+                    placeholder="Viết lại câu đồng nghĩa...">
                 <div class="progress-container"><div class="progress-bar-inner" id="bar-${i}"></div></div>
                 <div class="alert mt-2 py-2 hidden" id="res-${i}" style="font-size: 0.9rem;"></div>
             </div>
@@ -240,7 +221,8 @@
 
     function checkScores() {
         currentQuestions.forEach((q, i) => {
-            const userAns = document.getElementById(`ans-${i}`).value.toLowerCase().trim();
+            const inputEl = document.getElementById(`ans-${i}`);
+            const userAns = inputEl.value.toLowerCase().trim();
             const resDiv = document.getElementById(`res-${i}`);
             const progressBar = document.getElementById(`bar-${i}`);
             
@@ -256,12 +238,16 @@
             else if(score > 40) resDiv.classList.add('alert-warning');
             else resDiv.classList.add('alert-danger');
 
-            resDiv.innerHTML = `<strong>Điểm: ${score}%</strong><br>Đáp án đúng: <em>${q.correct}</em>`;
+            resDiv.innerHTML = `<strong>Kết quả: ${score}%</strong><br>Đáp đúng: <em>${q.correct}</em>`;
             progressBar.style.width = score + "%";
             progressBar.style.background = score === 100 ? '#10b981' : (score > 40 ? '#f59e0b' : '#ef4444');
         });
     }
+
+    // Khởi tạo lần đầu
+    window.onload = initQuiz;
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
